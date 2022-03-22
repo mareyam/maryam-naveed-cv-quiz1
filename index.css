@@ -1,0 +1,101 @@
+.container-fluid {
+  height: 35rem;
+  border: 2px solid black;
+  margin-top: 5rem;
+  display: flex;
+}
+.aboutMe {
+  border: 2px solid red;
+  width: 55%;
+}
+.aboutMe h1 {
+  color: #355c7d;
+  font-family: "Fira Code", monospace;
+  font-size: 4rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  text-align: left;
+  font-weight: bolder;
+}
+.aboutMe p {
+  font-size: 1.25rem;
+}
+.aboutMe a {
+  color: #355c7d;
+  text-decoration: none;
+}
+h1:hover {
+  animation: animation1 1s;
+}
+.skillsAndAnimation {
+  display: flex;
+  background-color: rgb(84, 82, 111);
+  color: black;
+  height: 5rem;
+  width: 100%;
+  border: 2px solid red;
+}
+.animation h3,
+.skills span {
+  font-size: 3rem;
+}
+
+span {
+  animation: animation2 10s infinite;
+  display: block;
+}
+
+@keyframes animation2 {
+  10% {
+    transform: translateY(-112%);
+  }
+
+  25% {
+    transform: translateY(-100%);
+  }
+  35% {
+    transform: translateY(-212%);
+  }
+  50% {
+    transform: translateY(-200%);
+  }
+  60% {
+    transform: translateY(-312%);
+  }
+  70% {
+    transform: translateY(-200%);
+  }
+  80% {
+    transform: translateY(-212%);
+  }
+  90% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(-112%);
+  }
+}
+@keyframes animation1 {
+  25% {
+    transform: translateY(20px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(20px);
+  }
+}
+
+/* }
+h1 {
+  padding-top: 2rem;
+  
+}
+
+@keyframes animate {
+  25% {
+  }
+} */
