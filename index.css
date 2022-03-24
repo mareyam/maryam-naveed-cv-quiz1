@@ -1,13 +1,15 @@
+/* center div  */
 .container-fluid {
   height: 35rem;
-  border: 2px solid black;
-  margin-top: 5rem;
-  display: flex;
+  display: block;
 }
-.aboutMe {
-  border: 2px solid red;
-  width: 55%;
+.nav-item {
+  display: block;
 }
+h1:hover {
+  animation: animation1 1s;
+}
+
 .aboutMe h1 {
   color: #355c7d;
   font-family: "Fira Code", monospace;
@@ -26,25 +28,32 @@
   color: #355c7d;
   text-decoration: none;
 }
-h1:hover {
-  animation: animation1 1s;
-}
-.skillsAndAnimation {
+
+.wrapper {
+  justify-content: center;
+  text-align: center;
+  background-color: #ffffff;
+  height: 10rem;
   display: flex;
-  background-color: rgb(84, 82, 111);
-  color: black;
-  height: 5rem;
-  width: 100%;
-  border: 2px solid red;
+  border-radius: 8px;
+  /* box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2); */
 }
-.animation h3,
-.skills span {
+.wrapper h3 {
+  color: #355c7d;
   font-size: 3rem;
 }
 
-span {
+.words span {
   animation: animation2 10s infinite;
   display: block;
+  height: 100%;
+  color: #0e6ffc;
+  animation: spin_words 6s infinite;
+}
+
+.words {
+  overflow: hidden;
+  font-size: 3rem;
 }
 
 @keyframes animation2 {
@@ -89,13 +98,102 @@ span {
   }
 }
 
-/* }
-h1 {
-  padding-top: 2rem;
-  
-}
-
-@keyframes animate {
-  25% {
+@keyframes spin_words {
+  10% {
+    transform: translateY(-112%);
   }
-} */
+  25% {
+    transform: translateY(-100%);
+  }
+  35% {
+    transform: translateY(-212%);
+  }
+  50% {
+    transform: translateY(-200%);
+  }
+  60% {
+    transform: translateY(-312%);
+  }
+  75% {
+    transform: translateY(-300%);
+  }
+  85% {
+    transform: translateY(-412%);
+  }
+  100% {
+    transform: translateY(-400%);
+  }
+}
+.div1 {
+  border: 2px solid red;
+  display: block;
+}
+#sidenavbar {
+  border: 2px solid red;
+  height: 38rem;
+  background-color: rgb(177, 157, 157);
+}
+.aboutMe {
+  border: 2px solid green;
+}
+.wrapper {
+  border: 2px solid blue;
+}
+/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */
+@media (max-width: 425px) {
+  #sidenavbar {
+    height: 4rem;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    background-color: lightgray;
+    margin-bottom: 2rem;
+    z-index: 9999;
+  }
+  .aboutMe p {
+    font-size: 1rem;
+  }
+  .aboutMe h1 {
+    color: green;
+    font-size: 1.75rem;
+  }
+  .aboutMe {
+    overflow: hidden;
+    margin-top: 4rem;
+  }
+  .wrapper h3 {
+    font-size: 1.75rem;
+  }
+  .words {
+    font-size: 1.75rem;
+  }
+}
