@@ -225,7 +225,7 @@ h1:hover {
     font-size: 1rem;
   }
   .aboutMe h1 {
-    color: green;
+ text-align: center;
     font-size: 1.75rem;
   }
   .aboutMe {
@@ -241,12 +241,62 @@ h1:hover {
   .skillsAndExpPara h1 {
     font-size: 1.75rem;
     flex-wrap: wrap;
+    text-align: center;
   }
   .experienceSubDiv1 {
     display: block;
   }
+  .frontend h3 {
+    text-align: center;
+  }
+  .backend h3 {
+    text-align: center;
+  }
+  .bs h4,
+  .masters h4{
+    font-size: 1.25rem;
+    text-align: center;
+  }
 }
 
+@media (max-width: 1024px) {
+  .aboutMe p {
+    font-size: 1rem;
+  }
+  .aboutMe h1 {
+ text-align: center;
+    font-size: 1.7rem;
+  }
+  .aboutMe {
+    overflow: hidden;
+    margin-top: 4rem;
+  }
+  .wrapper h3 {
+    font-size: 1.75rem;
+  }
+  .words {
+    font-size: 1.75rem;
+  }
+  .skillsAndExpPara h1 {
+    font-size: 1.75rem;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .experienceSubDiv1 {
+    display: block;
+  }
+  .frontend h3 {
+    text-align: center;
+  }
+  .backend h3 {
+    text-align: center;
+  }
+  .bs h4,
+  .masters h4{
+    font-size: 1.25rem;
+    text-align: center;
+  }
+}
 /* 
 
 
@@ -1823,3 +1873,30 @@ h2 {
   margin: 30px auto;
   color: green;
 }
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
