@@ -1,123 +1,108 @@
-(function($){
 
-	"use strict";
-
-	$.fn.formreact=function(options){
-
-		var defauts={
-			selector:'',
-			wrapResult:'',
-			resultMsg:function(){},
-			wrapEnd:'',
-			endMsg:'<p>End message</p>',
-			'result':function(formValues){
-					// handle the returned values
-					$(this.wrapResult).html(this.resultMsg(formValues));
-					$(this.wrapEnd).html(this.endMsg);
-				}
-			},
-			param=$.extend(defauts, options),
-			classActive='react-active',
-			classCompleted='react-completed',
-			classCursor='typed-cursor',
-			elem=$(this),
-			i=0;
-
-
-		elem
-
-			.each(function(){
-				$(this)
-					.children('p')
-						.addClass(param.selector.replace('.',''));
-			})
-
-			// Put focus on the react-active input when hovering the wrapping div
-			.on('mouseover click',function(){
-				$(param.selector + '.' + classActive).find('input').focus();
-			})
-
-			.find(param.selector)
-
-				.each(function(){
-
-					i++;
-					var $this=$(this);
-
-					$this
-						// reset the input values on browser refresh if necessary & append the necessary elements
-						.append('<input type="text" class="react-input" /><span class="content" ></span><span class="typed-cursor">&#9646;</span>')
-						.find('input')
-							.val('') ;
-
-					if (i===1) {
-						//add an active class to the first selector and focus on the input
-						$this
-							.addClass(classActive)
-							.find('input')
-								.focus();
-						}
-				})
-
-
-
-				// Actions when the enter key is pressed
-				.children('input').on("keyup",function(e){
-
-					var $this=$(this);
-					if(e.keyCode === 13){
-		 	   			if ($this.val()!==''){
-
-		 	   				$this
-		 	   					// prevents from going backwards and reediting a previous input
-		 	   					.prop('readonly', true)
-		 	   					.closest(param.selector)
-			 	   					.addClass(classCompleted)
-					                .removeClass(classActive);
-					    	$('.' + classCompleted + ' .' + classCursor).hide();
-					        $('.' + classActive + ' .' + classCursor).show();
-
-		 	   				// if another element exist, go to next input
-		 	   				if ($this.closest(param.selector).next().hasClass(param.selector.replace('.',''))){
-			 	   				$this
-			 	   					.closest(param.selector)
-						                .next(param.selector)
-						                    .addClass(classActive)
-						                    .find('input')
-						                        .focus();
-					    	}
-
-					    	// else if there is no more element
-				        	else {
-				        		var arrayReact=[];
-				        		$(param.selector).each(function(){
-				        			arrayReact.push($(this).find('input').val());
-				        		});
-				        		param.result(arrayReact);
-				        	}
-		 	   			}
-					}
-				})
-
-				// On input change, change the text displayed in the next span.content
-				.on("propertychange change click keyup input paste", function(){
-			        var el=$(this),
-			        	//finds the span where the text will be displayed
-			            display=$(this).closest(param.selector).find('.content');
-
-			        if (el.data('oldVal') != el.val()) {
-			            el.data('oldVal', el.val());
-			            display.html(el.val());
-			        }
-			        if (el.val()===''){
-			        	// Fix for chrome losing focus on deleting content
-			        	el.val('');
-			        }
-			    });
-
-		//CSS
-		$(param.selector).addClass('react-item');
-
-		return this;
-	};
+jQuery.noConflict();
+(function($) {
+	$(function() {
+		$('a.page-scroll').bind('click', function(event) {
+			var $anchor = $(this);
+			$('html, body').stop().animate({
+				scrollTop: $($anchor.attr('href')).offset().top
+			}, 1500, 'easeInOutExpo');
+			event.preventDefault();
+		});
+	});
 })(jQuery);
+
+// typer for hello
+window.onload = function() {
+	var elements = document.getElementsByClassName('txt-rotate');
+	for (var i = 0; i < elements.length; i++) {
+		var toRotate = elements[i].getAttribute('data-rotate');
+		var period = elements[i].getAttribute('data-period');
+		if (toRotate) {
+			new TxtRotate(elements[i], JSON.parse(toRotate), period);
+		}
+	}
+	// INJECT CSS
+	var css = document.createElement("style");
+	css.type = "text/css";
+	css.innerHTML = ".txt-rotate > .wrap { border-right: 10px solid #40E0D0 }";
+	document.body.appendChild(css);
+};
+
+var TxtRotate = function(el, toRotate, period) {
+	this.toRotate = toRotate;
+	this.el = el;
+	this.loopNum = 0;
+	this.period = parseInt(period, 1) || 1000;
+	this.txt = '';
+	this.tick();
+	this.isDeleting = false;
+};
+
+TxtRotate.prototype.tick = function() {
+	var i = this.loopNum % this.toRotate.length;
+	var fullTxt = this.toRotate[i];
+
+	if (this.isDeleting) {
+		this.txt = fullTxt.substring(0, this.txt.length - 1);
+	} else {
+		this.txt = fullTxt.substring(0, this.txt.length + 1);
+	}
+
+	this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+	var that = this;
+	var delta = 200 - Math.random() * 100;
+
+	if (this.isDeleting) {
+		delta /= 2;
+	}
+
+	if (!this.isDeleting && this.txt === fullTxt) {
+		delta = this.period;
+		this.isDeleting = true;
+	} else if (this.isDeleting && this.txt === '') {
+		this.isDeleting = false;
+		this.loopNum++;
+		delta = 200;
+	}
+
+	setTimeout(function() {
+		that.tick();
+	}, delta);
+};
+
+// number count for stats
+jQuery.noConflict();
+(function($) {
+	$('.counter').each(function() {
+		var $this = $(this),
+			countTo = $this.attr('data-count');
+
+		$({
+			countNum: $this.text()
+		}).animate({
+				countNum: countTo
+			},
+
+			{
+				duration: 3000,
+				easing: 'linear',
+				step: function() {
+					$this.text(Math.floor(this.countNum));
+				},
+				complete: function() {
+					$this.text(this.countNum);
+					//alert('finished');
+				}
+			});
+	});
+})(jQuery);
+
+// update footer copyright year
+
+var today = new Date();
+var year = today.getFullYear();
+
+var copyright = document.getElementById("copyright");
+copyright.innerHTML = '© Marina Marques '+ year;
